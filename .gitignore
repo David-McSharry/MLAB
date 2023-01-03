@@ -41,7 +41,7 @@ w2d4_attn_only_2L.pth
 w3d1_data
 .vs
 attn_only_2L_v2.pth_9144.pth
-
+.venv
 bin
 conda-meta
 etc
