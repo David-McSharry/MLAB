@@ -84,6 +84,7 @@ def intersect_rays_1d(rays: t.Tensor, segments: t.Tensor) -> t.Tensor:
     Return: shape (NR, )
     """
     intersects = t.zeros((rays.shape[0],), dtype=t.bool)
+    #TODO: vectorize this
     for i, ray in enumerate(rays):
         for _, segment in enumerate(segments):
             if intersect_ray_1d(ray, segment):
@@ -215,7 +216,7 @@ with open("w1d1_pikachu.pt", "rb") as f:
 
 num_pixels_y = 120
 num_pixels_z = 120
-y_limit = z_limit = 1
+y_limit = z_limit = 1    
 
 
 if MAIN:
@@ -227,9 +228,8 @@ if MAIN:
     fig, axes = plt.subplots(1, 2)
     axes[0].imshow(dists_square)
     axes[1].imshow(dists_square < 9999)
-
-
-if MAIN:
+    plt.show()
+    
     A = t.tensor([2, 0.0, -1.0])
     B = t.tensor([2, -1.0, 0.0])
     C = t.tensor([2, 1.0, 1.0])
@@ -243,21 +243,7 @@ if MAIN:
     ax.imshow(img)
     plt.show()
 
-if MAIN:
-    w1d1_test.test_triangle_line_intersects(triangle_line_intersects)
-    w1d1_test.test_intersect_ray_1d(intersect_ray_1d)
-    w1d1_test.test_intersect_ray_1d_special_case(intersect_ray_1d)
-    w1d1_test.test_intersect_rays_1d(intersect_rays_1d)
-    w1d1_test.test_intersect_rays_1d_special_case(intersect_rays_1d)
 
-
-
-rays1d = make_rays_1d(9, 10.0)
-segments = t.tensor([[[1.0, -12.0, 0.0], [1, -6.0, 0.0]], [[0.5, 0.1, 0.0], [0.5, 1.15, 0.0]], [[2, 12.0, 0.0], [2, 21.0, 0.0]]])
-one_triangle = t.tensor([[0, 0, 0], [3, 0.5, 0], [2, 3, 0]])
-
-if MAIN and (not IS_CI):
-    
     rays1d = make_rays_1d(9, 10.0)
     segments = t.tensor([[[1.0, -12.0, 0.0], [1, -6.0, 0.0]], [[0.5, 0.1, 0.0], [0.5, 1.15, 0.0]], [[2, 12.0, 0.0], [2, 21.0, 0.0]]])
     intersect_ray_1d(rays1d[0], segments[0])
@@ -268,8 +254,9 @@ if MAIN and (not IS_CI):
     render_lines_with_pyplot(two_rays)
     #plt.show()
 
-with open("w1d1_pikachu.pt", "rb") as f:
-    triangles = t.load(f)
+
+    
+    
 
 
 
