@@ -15,7 +15,6 @@ launch.json
 .idea/
 metrics.csv
 scratch.py
-w1d2_solution.py
 w1d2_cifar10_train
 w1d2_cifar10_test
 w1d2_resnet34_cifar10.pt
