@@ -48,3 +48,4 @@ include
 lib
 share
 ssl
+venv
